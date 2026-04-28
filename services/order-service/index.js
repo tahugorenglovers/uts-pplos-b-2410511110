@@ -11,6 +11,10 @@ app.use(express.json());
 // connect MongoDB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected"));
+    
+app.listen(process.env.PORT, () => {
+    console.log(`Order Service running on port ${process.env.PORT}`);
+});
 
 // middleware auth
 const authMiddleware = (req, res, next) => {
@@ -56,11 +60,13 @@ app.post('/orders', authMiddleware, async (req, res) => {
         });
 
     } catch (err) {
-        res.status(500).json({
-            message: "Error creating order",
-            error: err.message
-        });
-    }
+    console.error(err); // error catching
+
+    res.status(500).json({
+        message: "Error creating order",
+        error: err.message || err.toString()
+    });
+}
 });
 
 app.get('/orders', authMiddleware, async (req, res) => {
