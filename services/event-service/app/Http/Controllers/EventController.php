@@ -36,17 +36,6 @@ class EventController extends Controller
         return response()->json($event);
     }
 
-    /*public function show($id)
-    {
-        $event = Event::with(['venue', 'organizer', 'tickets'])->find($id);
-
-        if (!$event) {
-            return response()->json(['message' => 'Not found'], 404);
-        }
-
-        return response()->json($event);
-    }*/
-
     public function store(Request $request)
     {
         $event = Event::create($request->all());
