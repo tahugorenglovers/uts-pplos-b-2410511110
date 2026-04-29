@@ -16,6 +16,11 @@ app.listen(process.env.PORT, () => {
     console.log(`Order Service running on port ${process.env.PORT}`);
 });
 
+app.use((req, res, next) => {
+    console.log("ORDER HIT:", req.method, req.url);
+    next();
+});
+
 // middleware auth
 const authMiddleware = (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
@@ -30,13 +35,13 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-app.post('/orders', authMiddleware, async (req, res) => {
+app.post('/', authMiddleware, async (req, res) => {
     try {
         const { event_id, tickets } = req.body;
 
         // ambil data event dari Event Service
         const eventRes = await axios.get(
-            `${process.env.EVENT_SERVICE_URL}/events/${event_id}`
+            `${process.env.EVENT_SERVICE_URL}/api/events/${event_id}`
         );
 
         const event = eventRes.data;
@@ -69,7 +74,7 @@ app.post('/orders', authMiddleware, async (req, res) => {
 }
 });
 
-app.get('/orders', authMiddleware, async (req, res) => {
+app.get('/', authMiddleware, async (req, res) => {
     const orders = await Order.find({ user_email: req.user.email });
     res.json(orders);
 });
