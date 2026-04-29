@@ -128,7 +128,7 @@ app.post('/logout', (req, res) => {
     res.json({ message: "Logged out" });
 });
 
-// Protected route
+// Protected route for oauth
 app.get('/profile', authMiddleware, (req, res) => {
     res.json({ user: req.user });
 });
