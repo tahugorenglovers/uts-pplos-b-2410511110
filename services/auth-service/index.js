@@ -55,6 +55,7 @@ const authMiddleware = (req, res, next) => {
 
 // register
 app.post('/register', async (req, res) => {
+    console.log("REGISTER HIT");
     const { email, password } = req.body;
 
     if (!email || !password) {
