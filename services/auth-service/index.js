@@ -38,7 +38,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "http://localhost:3000/auth/google/callback"
 },
 (accessToken, refreshToken, profile, done) => {
     return done(null, profile);
@@ -112,13 +112,13 @@ app.post('/login', async (req, res) => {
 
 
 // google login
-app.get('/auth/google',
+app.get('/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 
 //google callback
-app.get('/auth/google/callback',
+app.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     async (req, res) => {
 
