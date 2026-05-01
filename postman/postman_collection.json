@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "31c989cf-dfaa-4730-aaa2-8be7a5468816",
-    "name": "UTS PPL - Event Ticketing Microservices",
+    "_postman_id": "31c989cf-dfaa-4730-aaa2-8be7a5468816", 
+    "name": "UTS PPL",
     "description": "UTS SE dengan nim 1-0. StartFragmentAuth, Event, Order, QR Ticket systemEndFragment",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "49024600",
