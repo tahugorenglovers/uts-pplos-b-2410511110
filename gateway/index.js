@@ -4,6 +4,16 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 60,
+    message: "Too many requests"
+});
+
+app.use(limiter);
+
 // logging
 app.use((req, res, next) => {
     console.log("Incoming:", req.method, req.url);
