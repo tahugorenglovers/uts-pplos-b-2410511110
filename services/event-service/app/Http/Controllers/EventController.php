@@ -37,9 +37,16 @@ class EventController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $event = Event::create($request->all());
+{
+    $request->validate([
+        'name' => 'required|string',
+        'date' => 'required|date',
+        'venue_id' => 'required|integer',
+        'organizer_id' => 'required|integer'
+    ]);
 
-        return response()->json($event, 201);
-    }
+    $event = Event::create($request->all());
+
+    return response()->json($event, 201);
+}
 }
